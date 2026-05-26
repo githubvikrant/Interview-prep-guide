@@ -233,6 +233,13 @@ app.delete('/users/:id', authenticate, authorize('admin'), async (req, res) => {
           <li>Use <strong>HTTPS only</strong> in production; set <code>secure: true</code> on cookies</li>
         </ul>
       </div>
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/jwt-authentication-in-node-js/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: JWT Auth in Node.js</a>
+          <a href="https://www.youtube.com/watch?v=f2EqECiTBL8" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: JWT Auth Tutorial</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -545,6 +552,14 @@ const topAuthors = await Post.aggregate([
           <li>Use <strong>cursor pagination</strong> for performance on large collections</li>
         </ul>
       </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/mongodb-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: MongoDB Top 50 Q&A</a>
+          <a href="https://www.youtube.com/watch?v=ofme2o29ngU" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: MongoDB Schema Design</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -680,6 +695,14 @@ app.use(session({
           <li>Cache invalidation: <strong>delete on write</strong> for consistency over TTL-only</li>
         </ul>
       </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/redis-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: Redis Top Q&A</a>
+          <a href="https://www.youtube.com/watch?v=jgpVdJB2sKQ" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: Redis Crash Course</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -812,6 +835,14 @@ const [user, settings] = await Promise.all([getUser(id), getSettings(id)]);</cod
           <li><strong>Async/Await</strong> is just syntactic sugar over Promises — same behavior</li>
         </ul>
       </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/node-js-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: Node.js Top 50 Q&A</a>
+          <a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: The Event Loop Explained</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -917,6 +948,14 @@ flowchart TD
           <li>Read replicas scale reads; Sharding scales writes</li>
           <li>Start with <strong>modular monolith</strong>, graduate to microservices when needed</li>
         </ul>
+      </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/top-10-system-design-interview-questions-and-answers/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: System Design Top 10</a>
+          <a href="https://www.youtube.com/watch?v=bUHFg8Cj-Ro" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: System Design Basics</a>
+        </div>
       </div>
     </section>
     <hr class="section-divider" />
@@ -1057,6 +1096,14 @@ app.post('/api/upload-doc', memUpload.single('doc'), async (req, res) => {
           <li>Always generate server-side filenames — never trust user-provided names</li>
         </ul>
       </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/file-uploading-in-node-js/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: File Upload in Node.js</a>
+          <a href="https://www.youtube.com/watch?v=srPXMt1Q0nY" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: Multer Image Upload</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -1192,6 +1239,14 @@ const isValid = await bcrypt.compare(password, hash);</code></pre>
           <li>NoSQL injection → <code>express-mongo-sanitize</code> + Mongoose ORM</li>
           <li>Secrets → .env locally, platform env vars in production, <strong>never in code</strong></li>
         </ul>
+      </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/web-security-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: Web Security Top Q&A</a>
+          <a href="https://www.youtube.com/watch?v=27-pIIfkXbQ" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: 10 Web Security Vulnerabilities</a>
+        </div>
       </div>
     </section>
     <hr class="section-divider" />
@@ -1332,6 +1387,14 @@ CMD ["node", "src/server.js"]
           <li>Use <strong>.dockerignore</strong> (like .gitignore) to exclude node_modules, .env</li>
         </ul>
       </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/docker-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: Docker Top 50 Q&A</a>
+          <a href="https://www.youtube.com/watch?v=gAkwW2tuIqE" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: Docker Tutorial for Beginners</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -1470,6 +1533,14 @@ flowchart LR
           <li>Store all secrets in <strong>platform env vars</strong> — never in GitHub repo</li>
         </ul>
       </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/devops-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: DevOps Top 50 Q&A</a>
+          <a href="https://www.youtube.com/watch?v=hQcFE0RD0cQ" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: DevOps in 100 Seconds</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -1582,6 +1653,14 @@ new Worker('ai', async (job) => {
           <li>Use <strong>gpt-4o-mini</strong> for most tasks — 95% quality at 5% cost of gpt-4</li>
         </ul>
       </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/artificial-intelligence-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: AI Top 50 Q&A</a>
+          <a href="https://www.youtube.com/watch?v=b-QePu_N4wU" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: OpenAI API Node.js Tutorial</a>
+        </div>
+      </div>
     </section>
     <hr class="section-divider" />
 
@@ -1688,6 +1767,14 @@ app.use((err, req, res, next) => {
           <li>Custom <code>AppError</code> class: distinguish operational vs programming errors</li>
           <li>Keep functions small, single-purpose, and named clearly</li>
         </ul>
+      </div>
+
+      <div class="resources-box">
+        <div class="card-label label-resources">🔗 Recommended Resources</div>
+        <div class="resource-links">
+          <a href="https://www.geeksforgeeks.org/software-engineering-interview-questions/" target="_blank" class="resource-btn gfg-btn"><span class="res-icon">💻</span> GfG: Software Engineering Q&A</a>
+          <a href="https://www.youtube.com/watch?v=yjkEX5fjO-Y" target="_blank" class="resource-btn yt-btn"><span class="res-icon">📺</span> YouTube: Clean Architecture in Node.js</a>
+        </div>
       </div>
     </section>
     <hr class="section-divider" />
