@@ -144,4 +144,20 @@ document.addEventListener('DOMContentLoaded', () => {
     el.setAttribute('data-src', el.textContent.trim());
   });
 
+  // ── Back to Top ───────────────────────────────────────────
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
 });
