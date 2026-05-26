@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Prep Study Guide | Full-Stack Developer</title>
+  <meta name="description" content="Comprehensive interview study guide covering Auth, Real-Time, Databases, Redis, Docker, System Design and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Header -->
+<header>
+  <button id="menu-toggle" aria-label="Toggle menu">☰</button>
+  <span class="logo">⚡ Interview Prep</span>
+  <input id="search-input" type="search" placeholder="Search topics..." aria-label="Search topics" />
+  <div class="header-actions">
+    <button id="theme-toggle">☀️ Light</button>
+  </div>
+</header>
+
+<!-- Layout -->
+<div class="layout">
+
+  <!-- Sidebar -->
+  <nav id="sidebar" aria-label="Topics navigation">
+    <p class="sidebar-section-label">📌 Overview</p>
+    <ul>
+      <li><a href="#hero"><span class="nav-num">🏠</span> Home</a></li>
+    </ul>
+    <p class="sidebar-section-label">🔥 Core Topics</p>
+    <ul>
+      <li><a href="#auth"><span class="nav-num">01</span> Authentication &amp; Auth</a></li>
+      <li><a href="#realtime"><span class="nav-num">02</span> Real-Time Systems</a></li>
+      <li><a href="#database"><span class="nav-num">03</span> Database Design</a></li>
+      <li><a href="#caching"><span class="nav-num">04</span> Caching (Redis)</a></li>
+      <li><a href="#async"><span class="nav-num">05</span> Async Architecture</a></li>
+      <li><a href="#systemdesign"><span class="nav-num">06</span> System Design</a></li>
+      <li><a href="#filestorage"><span class="nav-num">07</span> File Storage</a></li>
+      <li><a href="#security"><span class="nav-num">08</span> Security</a></li>
+      <li><a href="#docker"><span class="nav-num">09</span> Docker</a></li>
+      <li><a href="#devops"><span class="nav-num">10</span> DevOps &amp; Deployment</a></li>
+      <li><a href="#ai"><span class="nav-num">11</span> AI Integration</a></li>
+      <li><a href="#architecture"><span class="nav-num">12</span> Code Architecture</a></li>
+    </ul>
+    <p class="sidebar-section-label">📦 Core Stack</p>
+    <ul>
+      <li><a href="#stack">Tech Stack Mastery</a></li>
+    </ul>
+    <p class="sidebar-section-label">🚀 Project</p>
+    <ul>
+      <li><a href="#project">FlowBoard Blueprint</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="main-content">
+
+    <!-- HERO -->
+    <section id="hero" class="hero topic-section">
+      <h1>Full-Stack Interview Prep</h1>
+      <p>A complete, beginner-friendly guide to every critical topic — with diagrams, code, and interview Q&amp;A. Host it on GitHub Pages and revise anywhere.</p>
+      <div class="hero-tags">
+        <span class="tag">JWT &amp; Auth</span><span class="tag">WebSockets</span><span class="tag">MongoDB</span>
+        <span class="tag">Redis</span><span class="tag">Node.js</span><span class="tag">Docker</span>
+        <span class="tag">System Design</span><span class="tag">CI/CD</span><span class="tag">AI Integration</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         TOPIC 1: AUTHENTICATION & AUTHORIZATION
+    ═══════════════════════════════════════════════════ -->
+    <section id="auth" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(124,58,237,0.15)">🔐</div>
+        <div class="topic-title-group">
+          <h2>Authentication &amp; Authorization</h2>
+          <span class="priority-badge badge-critical">🔴 Very Important</span>
+        </div>
+      </div>
+
+      <!-- Plain English -->
+      <div class="analogy-box">
+        <div class="emoji">🏨</div>
+        <div class="card-label label-analogy">Plain English — Hotel Analogy</div>
+        <p><strong>Authentication</strong> is like checking into a hotel — you show your ID and get a key card. That's proving <em>who you are</em>.</p>
+        <p style="margin-top:0.5rem"><strong>Authorization</strong> is like what doors your key card can open — the gym, your room, but not the manager's office. That's deciding <em>what you're allowed to do</em>.</p>
+        <p style="margin-top:0.5rem">On the web: when you log in with email + password, that's Authentication. When the app checks "can this user delete other people's posts?", that's Authorization.</p>
+      </div>
+
+      <!-- Technical -->
+      <div class="card">
+        <div class="card-label label-tech">⚙️ How It Works — JWT Flow</div>
+        <p>Most modern apps use <strong>JWT (JSON Web Token)</strong> for stateless authentication:</p>
+        <ol style="padding-left:1.25rem; margin-top:0.75rem; font-size:0.88rem; color:var(--text-secondary)">
+          <li style="margin-bottom:0.4rem">User sends email + password → server verifies against DB</li>
+          <li style="margin-bottom:0.4rem">Server signs a JWT with a secret key and sends it back</li>
+          <li style="margin-bottom:0.4rem">Client stores JWT (httpOnly cookie is safer than localStorage)</li>
+          <li style="margin-bottom:0.4rem">Every future request includes this JWT in the Authorization header</li>
+          <li style="margin-bottom:0.4rem">Server verifies the JWT signature — no DB lookup needed (stateless!)</li>
+          <li>For security, use short-lived <strong>access tokens</strong> (15 min) + long-lived <strong>refresh tokens</strong> (7 days)</li>
+        </ol>
+      </div>
+
+      <!-- Diagram -->
+      <div class="diagram-container">
+        <div class="diagram-title">📊 JWT Authentication Flow</div>
+        <div class="mermaid">
+sequenceDiagram
+    participant C as 🌐 Client
+    participant S as ⚙️ Server
+    participant D as 🗄️ Database
+    C->>S: POST /login {email, password}
+    S->>D: Find user by email
+    D-->>S: User record
+    S->>S: bcrypt.compare(password, hash)
+    S-->>C: { accessToken (15min), refreshToken (7d) }
+    Note over C: Stores tokens securely
+    C->>S: GET /api/profile (Bearer accessToken)
+    S->>S: jwt.verify(token, SECRET)
+    S-->>C: 200 OK { user data }
+    Note over C,S: Access token expired?
+    C->>S: POST /refresh { refreshToken }
+    S->>D: Validate refresh token in DB
+    S-->>C: New accessToken issued
+        </div>
+      </div>
+
+      <!-- Code -->
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — Node.js / Express</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+// LOGIN — Issue tokens
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user || !await bcrypt.compare(password, user.password))
+    return res.status(401).json({ error: 'Invalid credentials' });
+
+  // Short-lived access token
+  const accessToken = jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: '15m' }
+  );
+
+  // Long-lived refresh token
+  const refreshToken = jwt.sign(
+    { id: user._id },
+    process.env.REFRESH_SECRET,
+    { expiresIn: '7d' }
+  );
+
+  // Store refresh token in DB (so we can revoke it)
+  await Token.create({ userId: user._id, token: refreshToken });
+
+  // Send refresh token as httpOnly cookie (XSS safe)
+  res.cookie('refreshToken', refreshToken, {
+    httpOnly: true, secure: true, sameSite: 'strict', maxAge: 7 * 24 * 60 * 60 * 1000
+  });
+
+  res.json({ accessToken });
+});
+
+// AUTH MIDDLEWARE
+const authenticate = (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'No token' });
+  try {
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch { res.status(403).json({ error: 'Invalid or expired token' }); }
+};
+
+// RBAC — Role-Based Access Control
+const authorize = (...roles) => (req, res, next) => {
+  if (!roles.includes(req.user.role))
+    return res.status(403).json({ error: 'Forbidden' });
+  next();
+};
+
+// Protected route — only admins
+app.delete('/users/:id', authenticate, authorize('admin'), async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  res.json({ message: 'User deleted' });
+});</code></pre>
+      </div>
+
+      <!-- Q&A -->
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is the difference between Authentication and Authorization?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Authentication</strong> verifies <em>who</em> you are (login with credentials). <strong>Authorization</strong> determines <em>what</em> you can do (permissions/roles). Auth always happens first. Example: logging into Gmail is authentication; only seeing YOUR emails is authorization.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>Why use short-lived access tokens + refresh tokens instead of one long-lived token?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A stolen long-lived token gives attackers permanent access. Short access tokens (15 min) limit damage if stolen. Refresh tokens are stored in httpOnly cookies (XSS-safe) and in DB (so they can be revoked/blacklisted if compromised). This gives both security AND good UX (users stay logged in without re-entering passwords).</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>Why store the JWT in an httpOnly cookie rather than localStorage?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">localStorage is accessible via JavaScript, making tokens vulnerable to XSS attacks (malicious scripts can steal them). httpOnly cookies cannot be read by JavaScript at all — only sent automatically with requests. This completely eliminates the XSS token theft vector. You still need CSRF protection when using cookies.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is RBAC and how do you implement it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Role-Based Access Control assigns users a role (admin, editor, viewer). Each route is protected by a middleware that checks if the user's role is in the allowed list. The role is embedded in the JWT payload on login. Example: <code>authorize('admin', 'editor')</code> middleware runs before the route handler and returns 403 if the role doesn't match.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you invalidate a JWT before it expires?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">JWTs are stateless — you can't truly "delete" them. Solutions: (1) <strong>Token blacklist</strong> in Redis: store invalidated token IDs until expiry; (2) <strong>Refresh token rotation</strong>: store refresh tokens in DB and delete on logout; (3) Use very short expiry (15min) to minimize the damage window. For logout, always invalidate the refresh token in the DB.</div>
+        </div>
+      </div>
+
+      <!-- Takeaways -->
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>Always hash passwords with <strong>bcrypt</strong> (never store plain text)</li>
+          <li>Use <strong>short access tokens</strong> (15 min) + <strong>refresh tokens</strong> (7 days) in httpOnly cookies</li>
+          <li>Implement <strong>RBAC</strong> with a reusable middleware function</li>
+          <li>For logout: delete refresh token from DB + clear cookie</li>
+          <li>Use <strong>HTTPS only</strong> in production; set <code>secure: true</code> on cookies</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════════
+         TOPIC 2: REAL-TIME SYSTEMS
+    ═══════════════════════════════════════════════════ -->
+    <section id="realtime" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(6,182,212,0.15)">⚡</div>
+        <div class="topic-title-group">
+          <h2>Real-Time Systems</h2>
+          <span class="priority-badge badge-critical">🔴 Huge Value</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">📱</div>
+        <div class="card-label label-analogy">Plain English — WhatsApp Analogy</div>
+        <p>Normal HTTP is like sending a letter — you write it, send it, wait for a reply. For a chat app, that's too slow!</p>
+        <p style="margin-top:0.5rem"><strong>WebSockets</strong> are like a phone call — once connected, both sides can talk at any time, instantly, without hanging up and calling again. This is why WhatsApp messages appear in real-time without you refreshing the page.</p>
+        <p style="margin-top:0.5rem"><strong>Socket.IO</strong> is a library that wraps WebSockets (with fallbacks) and adds rooms, namespaces, and event-based communication on top.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label label-tech">⚙️ WebSocket vs HTTP vs SSE</div>
+        <table style="width:100%; border-collapse:collapse; font-size:0.83rem; margin-top:0.5rem">
+          <tr style="border-bottom:1px solid var(--border)">
+            <th style="text-align:left; padding:0.5rem; color:var(--accent-violet)">Protocol</th>
+            <th style="text-align:left; padding:0.5rem; color:var(--accent-violet)">Direction</th>
+            <th style="text-align:left; padding:0.5rem; color:var(--accent-violet)">Use Case</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem; color:var(--text-primary)">HTTP REST</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Client → Server only</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">CRUD APIs, fetching data</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem; color:var(--text-primary)">SSE</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Server → Client only</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Live feeds, notifications</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem; color:var(--text-primary)">WebSocket</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Both directions</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Chat, games, collaboration</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 Socket.IO Room-Based Chat Architecture</div>
+        <div class="mermaid">
+flowchart TD
+    C1[👤 User A - Client] -->|socket.emit join-room| S[⚙️ Node.js Server\nSocket.IO]
+    C2[👤 User B - Client] -->|socket.emit join-room| S
+    C3[👤 User C - Client] -->|socket.emit join-room| S
+    S --> R1[🏠 Room: general]
+    S --> R2[🏠 Room: project-42]
+    R1 -->|io.to.emit new-message| C1
+    R1 -->|io.to.emit new-message| C2
+    R2 -->|io.to.emit new-message| C3
+    S <-->|Pub/Sub for scaling| Redis[(🔴 Redis\nAdapter)]
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — Socket.IO Server + Client</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ── SERVER (server.js) ──
+const { createServer } = require('http');
+const { Server } = require('socket.io');
+const app = require('./app');
+
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: { origin: process.env.CLIENT_URL, credentials: true }
+});
+
+// Auth middleware for sockets
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  try {
+    socket.user = jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch { next(new Error('Unauthorized')); }
+});
+
+io.on('connection', (socket) => {
+  console.log(`User connected: ${socket.user.id}`);
+
+  // Join a room (e.g., a chat channel or board)
+  socket.on('join-room', (roomId) => {
+    socket.join(roomId);
+    socket.to(roomId).emit('user-joined', { userId: socket.user.id });
+  });
+
+  // Handle incoming messages
+  socket.on('send-message', async ({ roomId, text }) => {
+    const msg = await Message.create({ roomId, text, userId: socket.user.id });
+    // Broadcast to everyone in the room (including sender)
+    io.to(roomId).emit('new-message', msg);
+  });
+
+  // Typing indicator (no DB needed — just broadcast)
+  socket.on('typing', ({ roomId }) => {
+    socket.to(roomId).emit('user-typing', { userId: socket.user.id });
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`User disconnected: ${socket.user.id}`);
+  });
+});
+
+// ── CLIENT (React) ──
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:5000', {
+  auth: { token: localStorage.getItem('accessToken') }
+});
+
+socket.emit('join-room', 'general');
+socket.on('new-message', (msg) => setMessages(prev => [...prev, msg]));</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is the difference between WebSockets and HTTP polling?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>HTTP polling</strong>: client repeatedly asks the server "any updates?" every X seconds — wasteful, high latency. <strong>Long polling</strong>: client asks, server holds the connection open until there's data — better, but still HTTP overhead. <strong>WebSockets</strong>: one persistent TCP connection established via HTTP upgrade — server can push data instantly with no repeated handshakes. Much lower latency and bandwidth usage.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you scale Socket.IO across multiple servers?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A single Socket.IO server can't share socket state with other server instances. Solution: use the <strong>Socket.IO Redis Adapter</strong> (<code>@socket.io/redis-adapter</code>). All server instances subscribe to the same Redis Pub/Sub channel. When one server emits to a room, Redis broadcasts it to all servers, which then relay it to their local connected clients. This allows horizontal scaling.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What are Socket.IO rooms and namespaces?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Rooms</strong> are logical groupings of sockets within a namespace. A socket can join multiple rooms. <code>io.to('room1').emit()</code> sends only to sockets in that room. Perfect for chat channels or boards. <strong>Namespaces</strong> are separate communication channels on the same server (like /chat vs /notifications). Each namespace has its own events, rooms, and middleware.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>When would you choose SSE over WebSockets?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Use <strong>Server-Sent Events (SSE)</strong> when you only need server-to-client communication (one direction) — e.g., live dashboards, news feeds, progress bars. SSE works over regular HTTP, is easier to implement, and automatically reconnects. Use <strong>WebSockets</strong> when you need bidirectional communication (e.g., chat, collaborative editing). SSE is simpler and more firewall-friendly for one-way use cases.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you handle authentication on WebSocket connections?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">You can't set custom headers on browser WebSocket connections. Two approaches: (1) Pass the JWT in the Socket.IO <code>auth</code> object during connection: <code>io({ auth: { token } })</code> and verify it in a socket middleware on the server. (2) Use a short-lived "socket ticket" — REST endpoint issues a one-time ticket, client passes it in the WebSocket URL query param. Never put tokens in URL query params in production.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>WebSockets = <strong>full-duplex</strong> persistent TCP connection (vs HTTP request/response)</li>
+          <li>Use <strong>rooms</strong> to broadcast to groups of users</li>
+          <li>Scale with <strong>Redis Adapter</strong> for multi-server deployments</li>
+          <li>Authenticate sockets using <strong>Socket.IO auth middleware</strong></li>
+          <li>SSE for one-way server push; WebSockets for bidirectional</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 3: DATABASE DESIGN
+    ═══════════════════════════════════════════════ -->
+    <section id="database" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(16,185,129,0.15)">🗄️</div>
+        <div class="topic-title-group">
+          <h2>Database Design</h2>
+          <span class="priority-badge badge-critical">🔴 Extremely Important</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">📚</div>
+        <div class="card-label label-analogy">Plain English — Library Analogy</div>
+        <p>A database is like a huge library. <strong>Schema design</strong> is deciding how to organize the shelves — do you put all books by one author together (embedding), or give each book its own catalog card that points to the author section (referencing)?</p>
+        <p style="margin-top:0.5rem"><strong>Indexing</strong> is like the card catalog — without it, you'd have to walk every single aisle to find one book. With it, you jump straight to the right shelf. <strong>Aggregation</strong> is like asking the librarian "how many books were borrowed this month?" — complex queries that summarize data.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label label-tech">⚙️ Embedding vs Referencing in MongoDB</div>
+        <table style="width:100%; border-collapse:collapse; font-size:0.83rem; margin-top:0.5rem">
+          <tr style="border-bottom:1px solid var(--border)">
+            <th style="text-align:left; padding:0.5rem; color:var(--accent-violet)">Strategy</th>
+            <th style="text-align:left; padding:0.5rem; color:var(--accent-violet)">When to Use</th>
+            <th style="text-align:left; padding:0.5rem; color:var(--accent-violet)">Example</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:0.5rem; color:var(--text-primary)"><strong>Embed</strong></td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Data always loaded together, small/bounded arrays</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">User → address, Post → tags</td>
+          </tr>
+          <tr>
+            <td style="padding:0.5rem; color:var(--text-primary)"><strong>Reference</strong></td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Data accessed independently, large/unbounded arrays</td>
+            <td style="padding:0.5rem; color:var(--text-secondary)">Post → author (User), Comment → Post</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 MongoDB Schema Design — Blog Platform</div>
+        <div class="mermaid">
+erDiagram
+    USER {
+        ObjectId _id
+        string name
+        string email
+        string passwordHash
+        string role
+        date createdAt
+    }
+    POST {
+        ObjectId _id
+        string title
+        string content
+        ObjectId authorId
+        string[] tags
+        int viewCount
+        date createdAt
+    }
+    COMMENT {
+        ObjectId _id
+        string text
+        ObjectId postId
+        ObjectId userId
+        date createdAt
+    }
+    USER ||--o{ POST : "writes"
+    POST ||--o{ COMMENT : "has"
+    USER ||--o{ COMMENT : "writes"
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — Mongoose Schema + Indexing + Aggregation</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ── SCHEMA WITH INDEXES ──
+const postSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  tags: [String],
+  viewCount: { type: Number, default: 0 },
+  createdAt: { type: Date, default: Date.now }
+});
+
+// Compound index for common query pattern
+postSchema.index({ author: 1, createdAt: -1 });
+// Text index for full-text search
+postSchema.index({ title: 'text', content: 'text' });
+
+// ── EFFICIENT QUERY ──
+// Pagination with sorting (much faster with index)
+const posts = await Post.find({ author: userId })
+  .sort({ createdAt: -1 })
+  .skip((page - 1) * limit)
+  .limit(limit)
+  .populate('author', 'name email'); // JOIN equivalent
+
+// ── AGGREGATION PIPELINE ──
+// "Get top 5 authors by post count this month"
+const topAuthors = await Post.aggregate([
+  { $match: { createdAt: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) } } },
+  { $group: { _id: '$author', postCount: { $sum: 1 }, totalViews: { $sum: '$viewCount' } } },
+  { $sort: { postCount: -1 } },
+  { $limit: 5 },
+  { $lookup: { from: 'users', localField: '_id', foreignField: '_id', as: 'authorInfo' } },
+  { $unwind: '$authorInfo' },
+  { $project: { name: '$authorInfo.name', postCount: 1, totalViews: 1 } }
+]);</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>When do you embed vs reference documents in MongoDB?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Embed</strong> when: data is always read together (1:1 or 1:few), the array is bounded and small, denormalization is acceptable. Example: user + address. <strong>Reference</strong> when: data is accessed independently, arrays are unbounded (comments on a viral post), or data is shared across documents. The "16MB document limit" rule: if embedding would grow documents unboundedly, always reference.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is an index and how does it improve query performance?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">An index is a data structure (B-tree) that MongoDB maintains separately from the collection. It stores a sorted copy of one or more fields with pointers to the full documents. Without an index, every query does a <strong>COLLSCAN</strong> (read every document). With an index, it does an <strong>IXSCAN</strong> (jump to the right documents). Trade-off: indexes speed up reads but slow down writes (index must be updated on every insert/update). Use <code>explain('executionStats')</code> to verify indexes are being used.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>Explain the MongoDB aggregation pipeline.<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">The aggregation pipeline is a sequence of stages, each transforming the data. Key stages: <code>$match</code> (filter, like WHERE), <code>$group</code> (like GROUP BY), <code>$sort</code>, <code>$limit</code>, <code>$lookup</code> (like SQL JOIN), <code>$project</code> (select fields), <code>$unwind</code> (flatten arrays). Data flows stage-by-stage — always put <code>$match</code> first to reduce data early. Put <code>$match</code> before <code>$lookup</code> to minimize data sent to the join.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you implement pagination efficiently?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Two approaches: (1) <strong>Offset pagination</strong>: <code>.skip(page * limit).limit(limit)</code> — simple but slow for large offsets (MongoDB must scan all skipped docs). (2) <strong>Cursor pagination</strong>: use the last document's _id or timestamp as a cursor: <code>find({ _id: { $gt: lastId } }).limit(limit)</code> — O(log n) regardless of page, better performance. Cursor pagination is preferred for large datasets. Always create an index on the sort field.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is a compound index and when would you use it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A compound index covers multiple fields: <code>{ author: 1, createdAt: -1 }</code>. It satisfies queries that filter on <code>author</code> alone OR on <code>author + createdAt</code> together (left-prefix rule). Use when your most common queries filter on multiple fields. The order matters — put equality fields first, then range/sort fields. One compound index can replace multiple single-field indexes for related queries.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li><strong>Embed</strong> for 1:few bounded data; <strong>Reference</strong> for 1:many unbounded data</li>
+          <li>Always index fields you <code>sort</code>, <code>filter</code>, or <code>join</code> on</li>
+          <li>Use <code>explain()</code> to confirm indexes are used in queries</li>
+          <li>Aggregation pipeline: always <strong>$match first</strong>, then $group, $lookup, $project</li>
+          <li>Use <strong>cursor pagination</strong> for performance on large collections</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 4: CACHING (REDIS)
+    ═══════════════════════════════════════════════ -->
+    <section id="caching" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(239,68,68,0.15)">🔴</div>
+        <div class="topic-title-group">
+          <h2>Caching with Redis</h2>
+          <span class="priority-badge badge-critical">🔴 Huge Differentiator</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">🧠</div>
+        <div class="card-label label-analogy">Plain English — Short-Term Memory Analogy</div>
+        <p>Imagine you're a chef. Every time a customer orders "Caesar salad," you walk to the storage room, get lettuce, croutons, dressing, prepare everything from scratch. That's hitting the database every time.</p>
+        <p style="margin-top:0.5rem"><strong>Redis is your prep station</strong> — you pre-make 20 Caesar salads and keep them ready. When the order comes, you serve instantly. When they run out (cache expires), you make a fresh batch.</p>
+        <p style="margin-top:0.5rem">Redis is an <strong>in-memory key-value store</strong> — data lives in RAM (not disk), so reads are ~0.1ms vs ~10ms for MongoDB. Perfect for frequently read, rarely changing data.</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 Cache-Aside Pattern (Most Common)</div>
+        <div class="mermaid">
+flowchart TD
+    A[📱 Client Request] --> B{🔴 Redis\nCache HIT?}
+    B -->|✅ Yes - Cache Hit| C[Return cached data\n~0.1ms]
+    B -->|❌ No - Cache Miss| D[🗄️ Query MongoDB\n~10ms]
+    D --> E[Store result in Redis\nwith TTL expiry]
+    E --> F[Return data to client]
+    C --> G[⚡ Response to Client]
+    F --> G
+    H[✏️ Data Updated] --> I[Invalidate/Update\nRedis cache key]
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — Redis Cache-Aside + Session + Rate Limiting</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">const redis = require('redis');
+const client = redis.createClient({ url: process.env.REDIS_URL });
+await client.connect();
+
+// ── CACHE-ASIDE PATTERN ──
+async function getCachedData(key, fetchFn, ttlSeconds = 300) {
+  // 1. Check cache
+  const cached = await client.get(key);
+  if (cached) return JSON.parse(cached);
+
+  // 2. Cache miss — fetch from DB
+  const data = await fetchFn();
+
+  // 3. Store in cache with TTL
+  await client.setEx(key, ttlSeconds, JSON.stringify(data));
+  return data;
+}
+
+// Usage
+app.get('/api/posts', async (req, res) => {
+  const posts = await getCachedData(
+    'posts:all',
+    () => Post.find().populate('author', 'name').lean(),
+    60 // 60 second TTL
+  );
+  res.json(posts);
+});
+
+// Invalidate cache when data changes
+app.post('/api/posts', authenticate, async (req, res) => {
+  const post = await Post.create({ ...req.body, author: req.user.id });
+  await client.del('posts:all'); // Bust the cache
+  res.status(201).json(post);
+});
+
+// ── RATE LIMITING WITH REDIS ──
+const rateLimit = (limit, windowSec) => async (req, res, next) => {
+  const key = `rate:${req.ip}`;
+  const current = await client.incr(key);
+  if (current === 1) await client.expire(key, windowSec);
+  if (current > limit) return res.status(429).json({ error: 'Too many requests' });
+  next();
+};
+
+// Apply: max 100 requests per 60 seconds
+app.use('/api', rateLimit(100, 60));
+
+// ── SESSION STORAGE ──
+const session = require('express-session');
+const RedisStore = require('connect-redis').default;
+app.use(session({
+  store: new RedisStore({ client }),
+  secret: process.env.SESSION_SECRET,
+  resave: false, saveUninitialized: false,
+  cookie: { secure: true, maxAge: 24 * 60 * 60 * 1000 }
+}));</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is the Cache-Aside pattern and when do you use it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Cache-Aside (Lazy Loading): application checks cache first. On miss, fetches from DB, stores in cache, returns. On hit, returns cached data. Best for <strong>read-heavy data</strong> (product listings, user profiles, board data). Trade-off: first request is always slow (cold start). Other patterns: <strong>Write-Through</strong> (update cache and DB simultaneously on write — consistent but slower writes), <strong>Write-Behind</strong> (update cache, async write to DB — fast writes but risk of data loss).</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is cache invalidation and why is it hard?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Cache invalidation is deciding when to remove or update cached data so clients don't get stale results. It's hard because: (1) <strong>Time-based TTL</strong>: simple but users may see stale data for up to TTL seconds; (2) <strong>Event-driven invalidation</strong>: delete cache key on data update — consistent but you must track all cache keys that depend on changed data; (3) <strong>Cache stampede</strong>: if TTL expires, many requests hit DB simultaneously. Solutions: use lock (mutex), background refresh, or staggered TTLs.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What data structures does Redis support?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Strings</strong>: simple key-value, counters (<code>INCR</code>). <strong>Hashes</strong>: like objects (<code>HSET user:1 name "John"</code>). <strong>Lists</strong>: ordered, push/pop from both ends — job queues. <strong>Sets</strong>: unique values — online users, tags. <strong>Sorted Sets</strong>: values with scores — leaderboards, priority queues. <strong>Pub/Sub</strong>: messaging between services. Right data structure = massive performance gains.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you implement rate limiting using Redis?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Use Redis <code>INCR</code> + <code>EXPIRE</code>. On each request: increment a counter keyed to the user's IP (or user ID). Set expiry on first increment. If counter exceeds limit, return 429. This is atomic and works across multiple server instances (unlike in-memory rate limiting). More precise alternative: sliding window using sorted sets — store timestamps of recent requests and count within the window.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is Redis Pub/Sub and how is it used?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Redis Pub/Sub is a messaging pattern where publishers send messages to channels and subscribers receive them. Used for: (1) <strong>Socket.IO scaling</strong> — broadcast events across multiple server instances; (2) <strong>Microservice events</strong> — "user signed up" triggers welcome email service; (3) <strong>Cache invalidation</strong> — one service publishes "data changed", others invalidate their caches. Unlike message queues, Pub/Sub is fire-and-forget — messages are lost if no subscriber is connected at that moment.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>Redis is <strong>in-memory</strong> — ~100x faster than DB for reads</li>
+          <li><strong>Cache-Aside</strong> = check cache → miss → fetch DB → store → return</li>
+          <li>Always set a <strong>TTL</strong> to prevent stale data from living forever</li>
+          <li>Use Redis for: caching, sessions, rate limiting, queues, Pub/Sub</li>
+          <li>Cache invalidation: <strong>delete on write</strong> for consistency over TTL-only</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 5: ASYNC & BACKEND ARCHITECTURE
+    ═══════════════════════════════════════════════ -->
+    <section id="async" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(245,158,11,0.15)">⚙️</div>
+        <div class="topic-title-group">
+          <h2>Async &amp; Backend Architecture</h2>
+          <span class="priority-badge badge-critical">🔴 Critical</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">🍕</div>
+        <div class="card-label label-analogy">Plain English — Restaurant Kitchen Analogy</div>
+        <p>Node.js is like a single chef who is extremely efficient. Instead of waiting at the oven for the pizza to bake (blocking), he starts the pizza, then immediately takes another order, then checks on the pasta. He never stands idle — that's the <strong>Event Loop</strong>.</p>
+        <p style="margin-top:0.5rem">But some jobs are too heavy — like making 1000 sandwiches. You don't want the chef (main thread) doing that during dinner rush. You hand that to a <strong>separate kitchen (job queue)</strong> — like BullMQ — that processes it in the background. The chef just drops a ticket and moves on.</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 Node.js Event Loop + Job Queue Architecture</div>
+        <div class="mermaid">
+flowchart LR
+    A[HTTP Request] --> B[Node.js\nEvent Loop\nSingle Thread]
+    B --> C{Async\nOperation?}
+    C -->|DB / File / Network| D[libuv Thread Pool\nor OS async]
+    D -->|Callback| B
+    B --> E[Response to Client]
+    B -->|Heavy Job\nemail/AI/image| F[BullMQ\nJob Queue]
+    F --> G[Redis\nJob Store]
+    G --> H[Worker Process\nBackground Thread]
+    H -->|Done| I[Job Complete\nNotify via Socket]
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — BullMQ Job Queue (Email + AI Worker)</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">const { Queue, Worker } = require('bullmq');
+const redisConfig = { connection: { host: 'localhost', port: 6379 } };
+
+// ── PRODUCER: Add jobs to queue ──
+const emailQueue = new Queue('emails', redisConfig);
+
+app.post('/register', async (req, res) => {
+  const user = await User.create(req.body);
+  
+  // Don't block the response — add to queue and return immediately
+  await emailQueue.add('welcome-email', {
+    to: user.email,
+    name: user.name,
+    userId: user._id.toString()
+  }, {
+    attempts: 3,        // Retry 3 times on failure
+    backoff: { type: 'exponential', delay: 2000 } // 2s, 4s, 8s
+  });
+
+  res.status(201).json({ message: 'Registered! Welcome email on its way.' });
+  // Email will be sent by worker in background — user gets response instantly
+});
+
+// ── CONSUMER: Worker processes jobs ──
+const emailWorker = new Worker('emails', async (job) => {
+  if (job.name === 'welcome-email') {
+    await sendEmail({
+      to: job.data.to,
+      subject: 'Welcome!',
+      html: `&lt;h1&gt;Hi ${job.data.name}!&lt;/h1&gt;&lt;p&gt;Thanks for joining.&lt;/p&gt;`
+    });
+    console.log(`✅ Welcome email sent to ${job.data.to}`);
+  }
+}, redisConfig);
+
+emailWorker.on('failed', (job, err) => {
+  console.error(`❌ Job ${job.id} failed:`, err.message);
+});
+
+// ── EVENT LOOP — Understanding Callbacks vs Promises ──
+// Callback Hell (bad)
+getUser(id, (user) => {
+  getPosts(user.id, (posts) => {
+    getComments(posts[0].id, (comments) => { /* nested hell */ });
+  });
+});
+
+// Promise Chain (better)
+getUser(id).then(user => getPosts(user.id)).then(posts => getComments(posts[0].id));
+
+// Async/Await (best — reads like sync code)
+const user = await getUser(id);
+const posts = await getPosts(user.id);
+const comments = await getComments(posts[0].id);
+
+// Run in parallel when independent
+const [user, settings] = await Promise.all([getUser(id), getSettings(id)]);</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>Explain the Node.js Event Loop.<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Node.js is single-threaded but non-blocking. The Event Loop continuously checks: (1) <strong>Call Stack</strong> — execute synchronous code; (2) <strong>Microtask Queue</strong> — Promises/async callbacks (processed after each call stack item); (3) <strong>Macro Task Queue</strong> — setTimeout, setInterval, I/O callbacks. When async operations (DB queries, file reads) complete, their callbacks are pushed to the queue. This allows Node.js to handle thousands of concurrent connections without creating a thread per connection.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is a job queue and why would you use one?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A job queue (BullMQ, Agenda) allows you to defer time-consuming tasks to background workers. Use when: sending emails, processing images/videos, calling slow AI APIs, generating reports, sending bulk notifications. Benefits: (1) Faster API responses (don't wait for slow operations); (2) Automatic retries on failure; (3) Rate limiting — don't overwhelm external APIs; (4) Visibility into job status; (5) Can scale workers independently. Redis backs BullMQ as the job store.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is Promise.all vs Promise.allSettled?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Promise.all</strong>: runs promises in parallel, resolves when ALL resolve. If ANY reject, it immediately rejects (fail-fast). Use when all operations are required. <strong>Promise.allSettled</strong>: waits for ALL to complete regardless of success/failure. Returns array of <code>{status, value/reason}</code>. Use when you want results from all operations even if some fail. <strong>Promise.race</strong>: resolves/rejects as soon as the FIRST promise settles — good for timeouts.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What blocks the Node.js event loop and how do you avoid it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Blocking operations prevent the event loop from processing other requests. Examples: CPU-intensive loops, synchronous file reads (<code>fs.readFileSync</code>), heavy JSON parsing, image processing. Solutions: (1) Use async versions (<code>fs.readFile</code>); (2) Offload to <strong>Worker Threads</strong> (<code>worker_threads</code> module) for CPU work; (3) Use job queues for heavy tasks; (4) Use <code>setImmediate</code> to break up long loops. Never use blocking operations in request handlers.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>Node.js is <strong>single-threaded non-blocking</strong> — Event Loop handles concurrency</li>
+          <li>Offload slow tasks (email, AI, image) to <strong>job queues</strong> (BullMQ)</li>
+          <li>Use <strong>Promise.all</strong> to run independent async ops in parallel</li>
+          <li>Never block the event loop — use async I/O, Worker Threads, or queues</li>
+          <li><strong>Async/Await</strong> is just syntactic sugar over Promises — same behavior</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 6: SYSTEM DESIGN THINKING
+    ═══════════════════════════════════════════════ -->
+    <section id="systemdesign" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(124,58,237,0.15)">🏗️</div>
+        <div class="topic-title-group">
+          <h2>System Design Thinking</h2>
+          <span class="priority-badge badge-critical">🔴 Most Important</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">🏙️</div>
+        <div class="card-label label-analogy">Plain English — City Planning Analogy</div>
+        <p>Building software at scale is like planning a city. You don't build one giant building for everyone — you have hospitals, schools, shops, each with their own purpose (<strong>microservices</strong>). You have roads connecting them (<strong>APIs</strong>). Traffic lights manage flow (<strong>load balancers</strong>). Water towers pre-store water so pipes don't run dry on demand (<strong>caching</strong>).</p>
+        <p style="margin-top:0.5rem">System Design interviews test whether you can think like a city planner — handle growth, failure, and scale — not just write code for one building.</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 Scalable Web App Architecture</div>
+        <div class="mermaid">
+flowchart TD
+    Client[🌐 Client\nReact/Next.js] --> CDN[☁️ CDN\nCloudflare]
+    CDN --> LB[⚖️ Load Balancer\nNginx]
+    LB --> S1[⚙️ API Server 1]
+    LB --> S2[⚙️ API Server 2]
+    LB --> S3[⚙️ API Server 3]
+    S1 & S2 & S3 --> Cache[🔴 Redis\nCache Layer]
+    S1 & S2 & S3 --> DB[(🗄️ MongoDB\nPrimary)]
+    DB --> R1[(📖 Read Replica 1)]
+    DB --> R2[(📖 Read Replica 2)]
+    S1 & S2 & S3 --> Q[📋 BullMQ\nJob Queue]
+    Q --> W1[👷 Worker 1]
+    Q --> W2[👷 Worker 2]
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">bash — System Design Interview Framework</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-bash"># SYSTEM DESIGN INTERVIEW FRAMEWORK (4 Steps)
+
+# STEP 1: Clarify Requirements (5 min)
+# - Scale: how many users? DAU? Read/write ratio?
+# - Features: what are the top 3 features to design?
+# - Constraints: latency requirements? Consistency vs availability?
+
+# STEP 2: High-Level Design (10 min)
+# - Client → CDN → Load Balancer → API Servers → Cache → DB
+# - Identify services, data flows, APIs
+
+# STEP 3: Deep Dive on Components (15 min)
+# - Database schema decisions
+# - Caching strategy (what to cache, TTL, invalidation)
+# - How to handle scale: horizontal scaling, sharding, replication
+
+# STEP 4: Handle Scale + Edge Cases (10 min)
+# - Bottlenecks? Single points of failure?
+# - How do you handle 10x traffic spike?
+# - What if DB goes down? (Read replicas, circuit breakers)
+
+# KEY CONCEPTS TO KNOW:
+# Horizontal Scaling: Add more servers (stateless design required)
+# Vertical Scaling: Bigger server (has limits, expensive)
+# Load Balancing: Round-robin, least-connections, IP hash
+# Database Replication: Primary (writes) + Replicas (reads)
+# Sharding: Split DB by key (userId % 4) across multiple DBs
+# CAP Theorem: Can't have Consistency + Availability + Partition tolerance all at once</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is horizontal vs vertical scaling?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Vertical scaling</strong>: upgrade the server (more RAM, CPU). Simple but has limits and creates single point of failure. <strong>Horizontal scaling</strong>: add more servers behind a load balancer. Requires stateless application design (sessions in Redis, not in-memory). Much more scalable — used by all major companies. For databases: read replicas handle read scale, sharding handles write scale.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>Explain the CAP Theorem.<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A distributed system can guarantee at most 2 of 3: <strong>Consistency</strong> (all nodes see the same data), <strong>Availability</strong> (every request gets a response), <strong>Partition Tolerance</strong> (system works despite network splits). Since network partitions always happen in distributed systems, you choose CA or CP: MongoDB chooses CP (consistency over availability). Redis chooses AP (availability over strict consistency). Design based on your needs — financial systems need CP; social feeds can accept AP.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is a CDN and when do you use it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A Content Delivery Network is a network of globally distributed servers that cache and serve static assets (images, CSS, JS, HTML) from the server closest to the user. Benefits: (1) Reduced latency — user in Mumbai gets assets from Mumbai server, not USA; (2) Reduced load on origin server; (3) DDoS protection. Use for: static files, images, video, Next.js static pages. Cloudflare and AWS CloudFront are common CDNs.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is a microservices architecture vs monolith?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Monolith</strong>: all features in one codebase/deployment. Simple to develop, deploy, debug. Becomes problematic at scale — one bug can bring down everything; can't scale individual parts. <strong>Microservices</strong>: split into independent services (Auth, Orders, Notifications). Each deploys independently, scales independently, uses its own DB. Trade-off: much more complex (network calls, distributed tracing, service discovery). Start with a modular monolith, extract services when you actually need to scale them.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>System Design framework: <strong>Clarify → High-Level → Deep Dive → Scale</strong></li>
+          <li>Stateless servers + Redis sessions = horizontal scaling friendly</li>
+          <li>CDN for static assets; Load Balancer for API servers</li>
+          <li>Read replicas scale reads; Sharding scales writes</li>
+          <li>Start with <strong>modular monolith</strong>, graduate to microservices when needed</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 7: FILE STORAGE & UPLOAD SYSTEMS
+    ═══════════════════════════════════════════════ -->
+    <section id="filestorage" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(6,182,212,0.15)">📁</div>
+        <div class="topic-title-group">
+          <h2>File Storage &amp; Upload Systems</h2>
+          <span class="priority-badge badge-very-important">🟠 Very Useful</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">📮</div>
+        <div class="card-label label-analogy">Plain English — Post Office Analogy</div>
+        <p>Your server is like a post office counter. When a customer (user) hands you a parcel (file), you don't keep it at the counter — the counter would get jammed. You send it to a <strong>warehouse (Cloudinary / S3)</strong> that's built for storage.</p>
+        <p style="margin-top:0.5rem">The customer gets a <strong>tracking number (URL)</strong> to retrieve the parcel later. Your counter stays free to handle more customers. This is why you never store files directly on your server — use cloud storage.</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 File Upload Flow — Multer → Cloudinary</div>
+        <div class="mermaid">
+sequenceDiagram
+    participant C as 🌐 Client
+    participant S as ⚙️ Node.js Server
+    participant M as 📦 Multer Middleware
+    participant CL as ☁️ Cloudinary
+
+    C->>S: POST /upload (multipart/form-data)
+    S->>M: Parse file from request
+    M->>M: Validate type & size
+    M->>CL: Upload buffer to Cloudinary
+    CL-->>M: { url, public_id }
+    M-->>S: File metadata
+    S->>S: Save URL to MongoDB
+    S-->>C: 200 OK { fileUrl }
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — Multer + Cloudinary Upload</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// ── OPTION 1: Stream directly to Cloudinary (no local disk) ──
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'interview-prep/avatars',
+    allowed_formats: ['jpg', 'png', 'webp'],
+    transformation: [{ width: 400, height: 400, crop: 'fill' }], // Auto resize
+  },
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowed.includes(file.mimetype))
+      return cb(new Error('Only JPEG/PNG/WebP images allowed'), false);
+    cb(null, true);
+  },
+});
+
+// Single file upload
+app.post('/api/avatar', authenticate, upload.single('avatar'), async (req, res) => {
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { avatar: req.file.path }, // Cloudinary URL stored in DB
+    { new: true }
+  );
+  // Delete old avatar from Cloudinary if it exists
+  if (user.oldAvatarId) await cloudinary.uploader.destroy(user.oldAvatarId);
+  res.json({ avatarUrl: req.file.path });
+});
+
+// Multiple files (e.g., task attachments)
+app.post('/api/tasks/:id/attachments', authenticate, upload.array('files', 5), async (req, res) => {
+  const urls = req.files.map(f => ({ url: f.path, name: f.originalname }));
+  await Task.findByIdAndUpdate(req.params.id, { $push: { attachments: { $each: urls } } });
+  res.json({ attachments: urls });
+});
+
+// ── OPTION 2: Memory buffer → upload programmatically ──
+const memUpload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+app.post('/api/upload-doc', memUpload.single('doc'), async (req, res) => {
+  const result = await new Promise((resolve, reject) => {
+    cloudinary.uploader.upload_stream({ folder: 'docs', resource_type: 'raw' }, (err, r) => {
+      err ? reject(err) : resolve(r);
+    }).end(req.file.buffer);
+  });
+  res.json({ url: result.secure_url });
+});</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>Why shouldn't you store uploaded files on your server?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Three reasons: (1) <strong>Scalability</strong> — if you horizontally scale to multiple servers, only one server has the file; (2) <strong>Persistence</strong> — servers on platforms like Heroku/Render have ephemeral file systems (files deleted on restart); (3) <strong>Performance</strong> — serving large files through Node.js blocks the event loop and uses server bandwidth. Cloud storage (Cloudinary, S3) solves all three: globally distributed, persistent, and clients download directly from CDN without touching your server.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you validate file uploads securely?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Never trust the file extension alone — it can be faked. Validate: (1) <strong>MIME type</strong> via <code>file.mimetype</code> in Multer's fileFilter (check against allowlist); (2) <strong>File size</strong> via <code>limits.fileSize</code>; (3) <strong>Magic bytes</strong> (file signature) using a library like <code>file-type</code> to verify the actual file content matches the claimed type; (4) <strong>Virus scanning</strong> for sensitive apps using ClamAV or VirusTotal API. Also always generate a new filename server-side — never use the original user-provided filename.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is a pre-signed URL and when would you use it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A pre-signed URL is a temporary, time-limited URL that allows a client to upload directly to S3/Cloudinary without routing the file through your server. Flow: (1) Client requests an upload URL from your server; (2) Server generates a signed URL using AWS SDK (valid for e.g. 15 minutes); (3) Client uploads directly to S3 using that URL; (4) Client notifies your server with the file key. Benefit: your server never handles the file bytes — reduces load and cost. Best for large files or high-volume uploads.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you handle large file uploads efficiently?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Chunked uploads</strong>: split large files into chunks on the client, upload each chunk separately, reassemble on the server or cloud storage. Supports pause/resume. Use pre-signed URLs for direct S3 multipart upload. <strong>Stream processing</strong>: instead of loading the entire file into memory with <code>memoryStorage</code>, use <code>diskStorage</code> or pipe directly to cloud storage — much lower memory footprint. For videos, upload to Cloudinary and use their transcoding pipeline.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>Never store files on your server — use <strong>Cloudinary or S3</strong></li>
+          <li>Validate MIME type + file size in Multer's <code>fileFilter</code></li>
+          <li>Store only the <strong>cloud URL</strong> in MongoDB, not the file itself</li>
+          <li>Use <strong>pre-signed URLs</strong> for large files (bypass server entirely)</li>
+          <li>Always generate server-side filenames — never trust user-provided names</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 8: SECURITY
+    ═══════════════════════════════════════════════ -->
+    <section id="security" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(239,68,68,0.15)">🛡️</div>
+        <div class="topic-title-group">
+          <h2>Security</h2>
+          <span class="priority-badge badge-critical">🔴 Massive Differentiator</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">🏰</div>
+        <div class="card-label label-analogy">Plain English — Castle Defence Analogy</div>
+        <p>A secure app is like a well-defended castle. The <strong>moat (HTTPS)</strong> prevents eavesdropping. The <strong>drawbridge guard (Helmet headers)</strong> checks everyone entering. The <strong>archers (rate limiting)</strong> slow down attackers. The <strong>secret compartments (input validation)</strong> prevent anyone from sneaking in through hidden passages (injection attacks).</p>
+        <p style="margin-top:0.5rem">Security is not one thing — it's <em>layers</em>. Each layer alone isn't enough; together they make breaching extremely difficult.</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 Security Layers in a Node.js App</div>
+        <div class="mermaid">
+flowchart TD
+    A[🌐 Incoming Request] --> B[HTTPS/TLS\nEncrypt in transit]
+    B --> C[Helmet.js\nSecurity Headers]
+    C --> D[CORS\nOrigin Whitelist]
+    D --> E[Rate Limiter\nRedis-based]
+    E --> F[Input Validation\nZod / Joi]
+    F --> G[Authentication\nJWT verify]
+    G --> H[Authorization\nRBAC check]
+    H --> I[Business Logic\nRoute Handler]
+    I --> J[Mongoose\nQuery with ORM - no raw injection]
+    J --> K[✅ Response]
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — Security Middleware Stack</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">const helmet = require('helmet');
+const cors = require('cors');
+const mongoSanitize = require('express-mongo-sanitize');
+const { z } = require('zod');
+const xss = require('xss-clean');
+
+// ── 1. HELMET — Sets security HTTP headers ──
+app.use(helmet());
+// Sets: X-Content-Type-Options, X-Frame-Options, Content-Security-Policy, etc.
+
+// ── 2. CORS — Only allow trusted origins ──
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://myapp.com', 'https://www.myapp.com']
+    : 'http://localhost:3000',
+  credentials: true, // Allow cookies
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
+
+// ── 3. XSS PROTECTION — Sanitize request body ──
+app.use(xss()); // Strips &lt;script&gt; tags from inputs
+
+// ── 4. NOSQL INJECTION — Remove $ operators from input ──
+app.use(mongoSanitize());
+// Prevents: { "email": { "$gt": "" } } injection attacks
+
+// ── 5. INPUT VALIDATION with Zod ──
+const loginSchema = z.object({
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Password must be 8+ characters'),
+});
+
+const validate = (schema) => (req, res, next) => {
+  const result = schema.safeParse(req.body);
+  if (!result.success)
+    return res.status(400).json({ errors: result.error.flatten() });
+  req.body = result.data; // Use validated/sanitized data
+  next();
+};
+
+app.post('/login', validate(loginSchema), async (req, res) => { /* ... */ });
+
+// ── 6. RATE LIMITING (Redis-based — see Topic 4) ──
+// 100 requests / 60 seconds per IP
+
+// ── 7. ENVIRONMENT SECRETS — Never hardcode ──
+// .env file (never commit to git)
+// JWT_SECRET=super-secret-key-256-bits
+// DB_URI=mongodb+srv://...
+// CLOUDINARY_SECRET=...
+
+// ── 8. PASSWORD HASHING ──
+const bcrypt = require('bcryptjs');
+const hash = await bcrypt.hash(password, 12); // 12 salt rounds
+const isValid = await bcrypt.compare(password, hash);</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is XSS and how do you prevent it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Cross-Site Scripting (XSS)</strong>: attacker injects malicious JavaScript into your app (e.g., via a comment field). When other users view that content, the script executes in their browser — stealing cookies/tokens. Prevention: (1) <strong>Escape output</strong> — React does this automatically; (2) <strong>Sanitize input</strong> — strip HTML tags on server with <code>xss-clean</code>; (3) <strong>Content Security Policy</strong> via Helmet — tells browser which scripts to trust; (4) <strong>httpOnly cookies</strong> — prevent JS from reading auth tokens even if XSS occurs.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is CSRF and how do you prevent it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Cross-Site Request Forgery</strong>: malicious website tricks a logged-in user's browser into making requests to your API (cookies are sent automatically). Prevention: (1) <strong>SameSite cookies</strong>: <code>sameSite: 'strict'</code> — browser won't send cookies on cross-site requests; (2) <strong>CSRF tokens</strong>: hidden token in forms, verified server-side; (3) <strong>Check Origin/Referer headers</strong>; (4) Using <strong>Authorization header</strong> (Bearer token) instead of cookies — cross-site requests can't set custom headers, so no CSRF risk. Modern APIs using JWT in headers + CORS are naturally CSRF-safe.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is SQL/NoSQL injection and how is it prevented?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Injection attacks insert malicious query operators into inputs. Classic SQL: <code>'; DROP TABLE users;--</code>. NoSQL (MongoDB): <code>{ "email": { "$gt": "" } }</code> bypasses login by matching ALL users. Prevention: (1) Use an ORM/ODM (Mongoose) — queries are parameterized, not raw strings; (2) Use <code>express-mongo-sanitize</code> — removes <code>$</code> and <code>.</code> from request body; (3) Validate input with Zod/Joi — reject non-string email values; (4) Principle of least privilege — DB user should only have permissions it needs.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What security headers does Helmet set and why do they matter?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>X-Content-Type-Options: nosniff</strong> — prevents browsers from guessing MIME types (MIME sniffing attacks). <strong>X-Frame-Options: DENY</strong> — prevents clickjacking (your app embedded in an iframe on a malicious site). <strong>Content-Security-Policy</strong> — whitelist trusted script/style sources, blocks inline XSS. <strong>Strict-Transport-Security (HSTS)</strong> — forces HTTPS even if user types http://. <strong>X-XSS-Protection</strong> — enables browser's built-in XSS filter. One line <code>app.use(helmet())</code> enables all of these.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you securely manage environment secrets?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Never hardcode secrets in source code. Best practices: (1) Store in <strong>.env file</strong> locally — add to .gitignore immediately; (2) Use <strong>dotenv</strong> to load them (<code>require('dotenv').config()</code>); (3) In production: use platform environment variables (Render, Railway settings) or a secrets manager (AWS Secrets Manager, HashiCorp Vault); (4) Rotate secrets regularly; (5) Use different secrets for dev/staging/production; (6) Audit git history if a secret was accidentally committed — consider it compromised and rotate immediately.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li><strong>Helmet</strong> = 7+ security headers in one line</li>
+          <li><strong>Validate ALL input</strong> with Zod before it touches your DB</li>
+          <li>XSS → escape output + httpOnly cookies + CSP headers</li>
+          <li>CSRF → SameSite cookies or Bearer token auth (not cookies for APIs)</li>
+          <li>NoSQL injection → <code>express-mongo-sanitize</code> + Mongoose ORM</li>
+          <li>Secrets → .env locally, platform env vars in production, <strong>never in code</strong></li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 9: DOCKER
+    ═══════════════════════════════════════════════ -->
+    <section id="docker" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(6,182,212,0.15)">🐳</div>
+        <div class="topic-title-group">
+          <h2>Docker &amp; Containerization</h2>
+          <span class="priority-badge badge-very-important">🟠 Very High Value</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">📦</div>
+        <div class="card-label label-analogy">Plain English — Shipping Container Analogy</div>
+        <p>Before shipping containers, loading a ship was chaos — each item needed different handling. After standardized containers, everything packed into the same-sized box that ships, trucks, and cranes all know how to handle.</p>
+        <p style="margin-top:0.5rem"><strong>Docker containers</strong> do the same for software. Your app, its Node version, its dependencies — all packed into one container. "Works on my machine" becomes irrelevant because the container runs identically everywhere: your laptop, your colleague's Windows machine, and your Ubuntu production server.</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 Docker Compose — Full Stack Setup</div>
+        <div class="mermaid">
+flowchart LR
+    DC[🐳 docker-compose up] --> A[📦 app\nNode.js:18\nPort 5000]
+    DC --> B[🔴 redis\nRedis:7\nPort 6379]
+    DC --> C[🍃 mongo\nMongo:7\nPort 27017]
+    A -->|depends_on| B
+    A -->|depends_on| C
+    A -->|MONGO_URI env| C
+    A -->|REDIS_URL env| B
+    NET[🌐 docker network:\napp-network] -.-> A
+    NET -.-> B
+    NET -.-> C
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">dockerfile + docker-compose.yml</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-bash"># ── Dockerfile (Node.js app) ──
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first (layer caching — deps don't rebuild unless changed)
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy source code
+COPY . .
+
+# Run as non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+EXPOSE 5000
+
+# Use exec form (not shell form) for proper signal handling
+CMD ["node", "src/server.js"]
+
+# ─────────────────────────────────────────────────────
+# docker-compose.yml (local development)
+# ─────────────────────────────────────────────────────
+# version: '3.9'
+# services:
+#   app:
+#     build: .
+#     ports: ["5000:5000"]
+#     environment:
+#       - NODE_ENV=development
+#       - MONGO_URI=mongodb://mongo:27017/myapp
+#       - REDIS_URL=redis://redis:6379
+#       - JWT_SECRET=dev-secret-change-in-prod
+#     volumes: ["./src:/app/src"]   # Hot reload in dev
+#     depends_on: [mongo, redis]
+#     networks: [app-network]
+#
+#   mongo:
+#     image: mongo:7
+#     volumes: [mongo-data:/data/db]
+#     networks: [app-network]
+#
+#   redis:
+#     image: redis:7-alpine
+#     networks: [app-network]
+#
+# volumes:
+#   mongo-data:         # Persists DB data between restarts
+#
+# networks:
+#   app-network:
+#     driver: bridge
+
+# ── Common Docker Commands ──
+# docker build -t myapp .           # Build image
+# docker run -p 5000:5000 myapp     # Run container
+# docker-compose up -d              # Start all services
+# docker-compose down               # Stop all services
+# docker-compose logs -f app        # View app logs
+# docker ps                         # List running containers
+# docker exec -it <id> sh           # Shell into container</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is the difference between a Docker image and a container?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">An <strong>image</strong> is a read-only blueprint — like a class in OOP. It contains the OS, runtime, dependencies, and app code baked in layers. A <strong>container</strong> is a running instance of an image — like an object instantiated from a class. You can run multiple containers from one image. Images are built with <code>docker build</code>, containers are started with <code>docker run</code>. Images are stored in registries (Docker Hub, ECR, GHCR).</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is Docker layer caching and how do you optimise for it?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Docker builds images layer by layer. Each instruction (<code>COPY</code>, <code>RUN</code>) creates a layer. Docker caches layers — if a layer hasn't changed, it reuses the cached version. Key optimisation: <strong>copy package.json BEFORE source code</strong>. If source changes but package.json doesn't, npm install uses the cache (saving minutes). If you copy everything at once, any source change invalidates the npm install layer and re-runs it unnecessarily. Order layers from least-to-most frequently changing.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>Why use Docker Compose instead of running containers manually?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Running <code>docker run</code> for each service manually requires remembering all port mappings, environment variables, volume mounts, and network configuration. Docker Compose defines all services in one <code>docker-compose.yml</code> file. Benefits: (1) One command to start/stop entire stack (<code>docker-compose up/down</code>); (2) Services communicate by service name (e.g., <code>mongodb://mongo:27017</code>) on a shared network; (3) <code>depends_on</code> ensures startup order; (4) Easy to reproduce the exact environment for any developer or CI pipeline.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is a multi-stage Docker build?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Multi-stage builds use multiple <code>FROM</code> statements. The first stage (build stage) can have dev dependencies and build tools. The final stage copies only the compiled output from the build stage, resulting in a much smaller production image. Example for TypeScript: Stage 1 installs all deps + compiles TS to JS. Stage 2 starts fresh with only Node:alpine, copies compiled JS, installs only production deps. Final image has no TypeScript compiler or source — much smaller and more secure.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>Image = blueprint; Container = running instance</li>
+          <li>Copy <strong>package.json first</strong> in Dockerfile for layer caching</li>
+          <li>Use <strong>docker-compose</strong> to orchestrate multi-service local stacks</li>
+          <li>Run containers as <strong>non-root user</strong> for security</li>
+          <li>Use <strong>.dockerignore</strong> (like .gitignore) to exclude node_modules, .env</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 10: DEPLOYMENT & DEVOPS
+    ═══════════════════════════════════════════════ -->
+    <section id="devops" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(16,185,129,0.15)">🚀</div>
+        <div class="topic-title-group">
+          <h2>Deployment &amp; DevOps</h2>
+          <span class="priority-badge badge-critical">🔴 Must Know</span>
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="emoji">🏭</div>
+        <div class="card-label label-analogy">Plain English — Factory Assembly Line Analogy</div>
+        <p>Without DevOps, releasing software is like a factory where workers manually carry products from station to station — slow, error-prone, inconsistent.</p>
+        <p style="margin-top:0.5rem"><strong>CI/CD</strong> is the automated assembly line. When you push code (<code>git push</code>), it automatically: runs tests, builds a Docker image, deploys to staging, runs smoke tests, then deploys to production — all without human intervention. If any step fails, the line stops. This is how Netflix deploys thousands of times per day safely.</p>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 CI/CD Pipeline — GitHub Actions</div>
+        <div class="mermaid">
+flowchart LR
+    A[👨‍💻 git push\nmain branch] --> B[🔄 GitHub Actions\nCI Workflow]
+    B --> C[📦 Install deps\nnpm ci]
+    C --> D[🧪 Run Tests\nnpm test]
+    D --> E{Tests\nPass?}
+    E -->|❌ Fail| F[🚫 Block merge\nNotify dev]
+    E -->|✅ Pass| G[🐳 Build Docker\nimage]
+    G --> H[📤 Push to\nGHCR Registry]
+    H --> I[🚀 Deploy to\nRender / Railway]
+    I --> J[🔍 Health check\n/api/health]
+    J --> K[✅ Live in\nProduction]
+        </div>
+      </div>
+
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">yaml — GitHub Actions CI/CD Workflow</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-bash"># .github/workflows/deploy.yml
+# name: CI/CD Pipeline
+#
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
+#
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: actions/setup-node@v4
+#         with: { node-version: '18', cache: 'npm' }
+#       - run: npm ci
+#       - run: npm test
+#
+#   build-and-deploy:
+#     needs: test          # Only runs if tests pass
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/main'
+#     steps:
+#       - uses: actions/checkout@v4
+#
+#       - name: Build Docker image
+#         run: docker build -t ghcr.io/${{ github.repository }}:latest .
+#
+#       - name: Push to GitHub Container Registry
+#         run: |
+#           echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+#           docker push ghcr.io/${{ github.repository }}:latest
+#
+#       - name: Deploy to Render
+#         run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+
+# ── Nginx Reverse Proxy Config ──
+# server {
+#     listen 80;
+#     server_name myapp.com;
+#     return 301 https://$host$request_uri;   # Force HTTPS
+# }
+# server {
+#     listen 443 ssl;
+#     server_name myapp.com;
+#     ssl_certificate /etc/letsencrypt/live/myapp.com/fullchain.pem;
+#     ssl_certificate_key /etc/letsencrypt/live/myapp.com/privkey.pem;
+#
+#     location / {
+#         proxy_pass http://localhost:5000;
+#         proxy_http_version 1.1;
+#         proxy_set_header Upgrade $http_upgrade;   # WebSocket support
+#         proxy_set_header Connection 'upgrade';
+#         proxy_set_header Host $host;
+#     }
+# }
+
+# ── Health Check Endpoint ──
+# app.get('/api/health', (req, res) => {
+#   res.json({ status: 'ok', uptime: process.uptime(), timestamp: Date.now() });
+# });</code></pre>
+      </div>
+
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is CI/CD and why is it important?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Continuous Integration (CI)</strong>: automatically run tests on every code push to catch bugs early, before they reach main branch. <strong>Continuous Deployment (CD)</strong>: automatically deploy to production after tests pass — no manual steps. Benefits: (1) Faster feedback loop on bugs; (2) Prevents "merge hell" with frequent small integrations; (3) Consistent, repeatable deployments; (4) Rollback is easy (just redeploy previous Docker image); (5) Developers focus on features, not deployment logistics. Tools: GitHub Actions, GitLab CI, CircleCI.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is the difference between Render, Railway, and a VPS (DigitalOcean)?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Render/Railway</strong> (PaaS): managed platforms — you push code/Docker image, they handle servers, SSL, scaling. Zero server management. Higher cost per resource, but low ops overhead. Perfect for startups and side projects. <strong>VPS (DigitalOcean, Linode)</strong>: raw Linux server — you configure Nginx, SSL (Let's Encrypt), PM2, firewall, everything yourself. Lower cost, full control, but significant ops knowledge required. <strong>AWS/GCP/Azure</strong>: enterprise cloud — EC2, ECS, Kubernetes. Maximum scale and flexibility, maximum complexity. Choose based on team size and operational capability.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is Nginx and why do you use it with Node.js?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Nginx is a high-performance web server/reverse proxy. Use cases with Node.js: (1) <strong>Reverse proxy</strong> — receives requests on port 80/443, forwards to Node.js on port 5000 (Node shouldn't run as root on port 80); (2) <strong>SSL termination</strong> — handles HTTPS/TLS, passes plain HTTP to Node; (3) <strong>Static file serving</strong> — serves React build files directly without hitting Node; (4) <strong>Load balancing</strong> — distributes requests across multiple Node processes; (5) <strong>WebSocket proxy</strong> — requires <code>Upgrade</code> header passthrough config. Much more efficient than Node for these tasks.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you handle zero-downtime deployments?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Strategies: (1) <strong>Rolling deployment</strong>: gradually replace old containers with new ones — load balancer routes to healthy instances; (2) <strong>Blue-Green deployment</strong>: run two identical environments (blue=current, green=new). Switch traffic to green instantly after validation. Blue becomes standby for instant rollback; (3) <strong>PM2 cluster mode</strong>: <code>pm2 reload</code> gracefully restarts workers one-by-one; (4) <strong>Health checks</strong>: only route traffic to instances passing health checks. Platforms like Render/Railway handle this automatically with their deployment pipeline.</div>
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>CI = auto-test on every push; CD = auto-deploy on passing tests</li>
+          <li>Use <strong>GitHub Actions</strong> for free CI/CD with GitHub repos</li>
+          <li>Always add a <strong>/api/health</strong> endpoint for monitoring</li>
+          <li><strong>Nginx</strong> sits in front of Node — handles SSL, static files, WebSocket proxy</li>
+          <li>Store all secrets in <strong>platform env vars</strong> — never in GitHub repo</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 11: AI INTEGRATION
+    ═══════════════════════════════════════════════ -->
+    <section id="ai" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(124,58,237,0.15)">🤖</div>
+        <div class="topic-title-group">
+          <h2>AI Integration</h2>
+          <span class="priority-badge badge-important">🟣 Optional But Powerful</span>
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="emoji">🧑‍✈️</div>
+        <div class="card-label label-analogy">Plain English — Co-Pilot Analogy</div>
+        <p>AI APIs are like having a brilliant co-pilot. The pilot (your app) still controls the plane — but for complex decisions like "what route avoids bad weather?" (e.g., "summarise this document"), you ask the co-pilot (GPT-4). You don't build the co-pilot from scratch — you just call them on the radio (API call).</p>
+        <p style="margin-top:0.5rem">The key skill isn't knowing machine learning — it's knowing <strong>how to integrate AI responsibly</strong>: prompt engineering, caching responses, handling failures, and not blocking your server while waiting for the AI.</p>
+      </div>
+      <div class="diagram-container">
+        <div class="diagram-title">📊 Production AI Integration Pattern</div>
+        <div class="mermaid">
+flowchart TD
+    A[📱 Client Request\nanalyse task] --> B[⚙️ Node.js API]
+    B --> C{🔴 Redis\nCached response?}
+    C -->|✅ Hit| D[Return cached\nAI response]
+    C -->|❌ Miss| E[📋 BullMQ\nAdd AI job]
+    E --> F[👷 Worker]
+    F --> G[🤖 OpenAI API\ngpt-4o-mini]
+    G --> H[Parse + validate\nAI response]
+    H --> I[Cache in Redis\nTTL 1 hour]
+    I --> J[💬 Notify client\nvia Socket.IO]
+        </div>
+      </div>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — OpenAI Integration with caching + queue</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">const OpenAI = require('openai');
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// ── Cached AI call — never hit OpenAI twice for same input ──
+async function cachedAICall(prompt, cacheKey, ttl = 3600) {
+  const cached = await redis.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+
+  const response = await client.chat.completions.create({
+    model: 'gpt-4o-mini',       // Cheaper, faster than gpt-4
+    messages: [
+      { role: 'system', content: 'You are a helpful project management assistant. Always respond with valid JSON.' },
+      { role: 'user', content: prompt }
+    ],
+    max_tokens: 500,
+    temperature: 0.3,           // Lower = more deterministic
+    response_format: { type: 'json_object' }
+  });
+
+  const result = JSON.parse(response.choices[0].message.content);
+  await redis.setEx(cacheKey, ttl, JSON.stringify(result));
+  return result;
+}
+
+// ── Route: AI breaks a goal into tasks ──
+app.post('/api/ai/breakdown', authenticate, async (req, res) => {
+  const { goal } = req.body;
+  const cacheKey = `ai:breakdown:${Buffer.from(goal).toString('base64').slice(0, 40)}`;
+
+  // Add to BullMQ — don't block HTTP response
+  const job = await aiQueue.add('breakdown', { goal, userId: req.user.id, cacheKey });
+  res.json({ jobId: job.id, message: 'AI is working on it...' });
+});
+
+// ── Worker: process AI job in background ──
+new Worker('ai', async (job) => {
+  if (job.name === 'breakdown') {
+    const tasks = await cachedAICall(
+      `Break down this goal into 5-7 specific, actionable tasks: "${job.data.goal}". 
+       Return JSON: { "tasks": [{ "title": string, "priority": "high|medium|low", "estimate": string }] }`,
+      job.data.cacheKey
+    );
+    // Notify client via Socket.IO
+    io.to(job.data.userId).emit('ai-result', { type: 'breakdown', data: tasks });
+  }
+}, redisConfig);</code></pre>
+      </div>
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you prevent AI API calls from blocking your Node.js server?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">OpenAI calls can take 5–30 seconds. Never <code>await</code> them in a route handler synchronously. Best approach: (1) Add to a <strong>BullMQ job queue</strong> — respond immediately with a job ID; (2) Worker processes AI call in background; (3) Notify client via <strong>Socket.IO</strong> when done. For streaming responses, use OpenAI's streaming API and pipe chunks via SSE. Also cache common AI responses in Redis to avoid redundant API calls entirely.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is prompt engineering and why does it matter?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Prompt engineering is crafting the input to an LLM to reliably get useful, structured output. Key techniques: (1) <strong>System prompt</strong> — set context and output format (e.g., "always respond with JSON"); (2) <strong>Few-shot examples</strong> — show input/output pairs to guide format; (3) <strong>Temperature</strong> — lower (0.1-0.3) for factual/structured output, higher (0.7-1.0) for creative; (4) <strong>JSON mode</strong> — <code>response_format: { type: 'json_object' }</code> ensures parseable output. Good prompts reduce token usage and hallucinations.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you control AI API costs in production?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">(1) <strong>Cache responses</strong> — identical or similar prompts return cached result from Redis; (2) <strong>Use cheaper models</strong> — gpt-4o-mini costs ~20x less than gpt-4; (3) <strong>Rate limit per user</strong> — max N AI calls per day; (4) <strong>Truncate context</strong> — don't send entire chat history, summarise or use sliding window; (5) <strong>Set max_tokens</strong> — cap response length; (6) <strong>Monitor usage</strong> — set spend alerts in OpenAI dashboard; (7) Batch similar requests together when possible.</div>
+        </div>
+      </div>
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>Always run AI calls in <strong>background workers</strong> — never block the HTTP thread</li>
+          <li><strong>Cache AI responses</strong> in Redis — same input should never hit OpenAI twice</li>
+          <li>Use <strong>json_object mode</strong> for reliable structured output parsing</li>
+          <li>Rate limit per user + set spend alerts to control costs</li>
+          <li>Use <strong>gpt-4o-mini</strong> for most tasks — 95% quality at 5% cost of gpt-4</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 12: ARCHITECTURE & CODE QUALITY
+    ═══════════════════════════════════════════════ -->
+    <section id="architecture" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(245,158,11,0.15)">🏛️</div>
+        <div class="topic-title-group">
+          <h2>Architecture &amp; Code Quality</h2>
+          <span class="priority-badge badge-very-important">🟠 Very Overlooked</span>
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="emoji">🏗️</div>
+        <div class="card-label label-analogy">Plain English — Building Blueprint Analogy</div>
+        <p>Bad code architecture is like building a house without blueprints — everything works at first, but when you need to add a bathroom, you discover the pipes run through a load-bearing wall. You can't change one thing without breaking another.</p>
+        <p style="margin-top:0.5rem">Good architecture is the blueprint that makes each room (module) independent. You can renovate the kitchen without touching the bedroom. In code: <strong>separation of concerns</strong> means your database logic doesn't bleed into your route handlers. Each layer has one clear job.</p>
+      </div>
+      <div class="code-block-wrapper">
+        <div class="code-block-header">
+          <span class="code-lang">javascript — Clean Layered Architecture (Express)</span>
+          <button class="copy-btn">Copy</button>
+        </div>
+        <pre><code class="language-javascript">// ── Folder Structure ──
+// src/
+// ├── routes/      user.routes.js     → just defines endpoints
+// ├── controllers/ user.controller.js → handles req/res
+// ├── services/    user.service.js    → business logic
+// ├── models/      user.model.js      → DB schema
+// ├── middleware/  auth.middleware.js
+// ├── utils/       email.js, cache.js
+// └── config/      db.js, redis.js
+
+// ── routes/user.routes.js ──
+router.post('/register', validate(registerSchema), userController.register);
+router.get('/profile', authenticate, userController.getProfile);
+
+// ── controllers/user.controller.js ──
+// Only handles HTTP layer — no business logic here
+const register = async (req, res, next) => {
+  try {
+    const user = await userService.register(req.body); // delegate to service
+    res.status(201).json({ user });
+  } catch (err) { next(err); } // pass to error handler
+};
+
+// ── services/user.service.js ──
+// Pure business logic — no req/res, easily testable
+const register = async ({ name, email, password }) => {
+  const exists = await User.findOne({ email });
+  if (exists) throw new AppError('Email already in use', 409);
+
+  const hash = await bcrypt.hash(password, 12);
+  const user = await User.create({ name, email, password: hash });
+
+  await emailQueue.add('welcome', { to: email, name });
+  return sanitizeUser(user); // never return password hash
+};
+
+// ── utils/AppError.js — Custom error class ──
+class AppError extends Error {
+  constructor(message, statusCode) {
+    super(message);
+    this.statusCode = statusCode;
+    this.isOperational = true; // vs programming errors
+  }
+}
+
+// ── Centralised error handler middleware ──
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+  const message = err.isOperational ? err.message : 'Internal Server Error';
+  console.error(err); // log stack trace
+  res.status(status).json({ error: message });
+});</code></pre>
+      </div>
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is separation of concerns and why does it matter?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Separation of concerns means each part of the code has one clear responsibility. In Express: <strong>Routes</strong> define URL endpoints only. <strong>Controllers</strong> handle HTTP (req/res). <strong>Services</strong> contain business logic (no HTTP knowledge). <strong>Models</strong> define data shape. Why it matters: (1) Easy to test — services can be unit tested without HTTP; (2) Easy to change — swap MongoDB for PostgreSQL by changing only the model layer; (3) Easy to read — you know exactly where to find each type of logic; (4) Team collaboration — different devs can own different layers.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you handle errors consistently across an Express app?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">Use a <strong>centralised error handler middleware</strong> (4 argument function at the end of middleware chain). Throw/forward all errors to it with <code>next(err)</code>. Create a custom <code>AppError</code> class with <code>statusCode</code> and <code>isOperational</code>. Operational errors (user not found, validation fail) return descriptive messages. Programming errors (null reference, syntax) return generic "Internal Server Error" to avoid leaking internals. Use <code>process.on('unhandledRejection')</code> to catch unhandled promise rejections globally.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What SOLID principles apply to Node.js/Express code?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>S — Single Responsibility</strong>: one function/class does one thing (controller vs service vs model). <strong>O — Open/Closed</strong>: extend behaviour without modifying existing code (middleware chain — add new middleware rather than modify existing ones). <strong>D — Dependency Inversion</strong>: depend on abstractions, not concretions (inject services into controllers rather than hardcoding). In practice: keep functions small (under 20 lines), give them clear names, write them to be unit-testable, and prefer composition over inheritance.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>How do you write maintainable async code in Node.js?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">(1) Always use <strong>async/await</strong> over callbacks or raw .then chains; (2) Wrap every async route handler in try/catch OR use an <code>asyncWrapper</code> higher-order function; (3) Never swallow errors silently — always log or rethrow; (4) Use <strong>Promise.all</strong> for parallel independent operations (don't await sequentially when not needed); (5) Validate inputs at the boundary (controller) before they reach services; (6) Keep service functions <strong>pure where possible</strong> — same input → same output, no hidden side effects.</div>
+        </div>
+      </div>
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li>Structure: <strong>Routes → Controllers → Services → Models</strong></li>
+          <li>Services contain business logic — no req/res, easily unit-testable</li>
+          <li>Use a <strong>centralised error handler</strong> — no scattered try/catch everywhere</li>
+          <li>Custom <code>AppError</code> class: distinguish operational vs programming errors</li>
+          <li>Keep functions small, single-purpose, and named clearly</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         CORE STACK MASTERY
+    ═══════════════════════════════════════════════ -->
+    <section id="stack" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(6,182,212,0.15)">📦</div>
+        <div class="topic-title-group">
+          <h2>Core Stack Mastery</h2>
+          <span class="priority-badge badge-critical">🔴 Foundation</span>
+        </div>
+      </div>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="stack-card-icon">⚡</div>
+          <h4>JavaScript</h4>
+          <p>Closures, Promises, Event Loop, Prototypes, ES6+</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:100%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🟢</div>
+          <h4>Node.js</h4>
+          <p>Event Loop, Streams, Worker Threads, Modules</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:100%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🚂</div>
+          <h4>Express.js</h4>
+          <p>Middleware, Router, Error handling, REST patterns</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:95%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🍃</div>
+          <h4>MongoDB</h4>
+          <p>Schema design, Aggregations, Indexes, Transactions</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:95%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">⚛️</div>
+          <h4>React</h4>
+          <p>Hooks, Context, State management, Performance</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:90%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">▲</div>
+          <h4>Next.js</h4>
+          <p>SSR, SSG, API Routes, App Router, Middleware</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🔴</div>
+          <h4>Redis</h4>
+          <p>Cache-Aside, Pub/Sub, Rate limiting, Sessions</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:90%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🔌</div>
+          <h4>Socket.IO</h4>
+          <p>Rooms, Namespaces, Auth middleware, Redis adapter</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🐳</div>
+          <h4>Docker</h4>
+          <p>Dockerfile, docker-compose, multi-stage builds</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🔐</div>
+          <h4>JWT / Auth</h4>
+          <p>Access tokens, Refresh tokens, RBAC, OAuth</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:100%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🐙</div>
+          <h4>Git</h4>
+          <p>Branching, Rebase, Cherry-pick, Conflict resolution</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:95%"></div></div>
+        </div>
+        <div class="stack-card">
+          <div class="stack-card-icon">🚀</div>
+          <h4>Deployment</h4>
+          <p>Render, Railway, Nginx, GitHub Actions, CI/CD</p>
+          <div class="depth-bar"><div class="depth-fill" style="width:90%"></div></div>
+        </div>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         PROJECT BLUEPRINT: FLOWBOARD
+    ═══════════════════════════════════════════════ -->
+    <section id="project" class="topic-section">
+      <div class="project-hero">
+        <h2>🚀 FlowBoard — Recommended Portfolio Project</h2>
+        <div class="subtitle">Real-Time AI-Enhanced Project Management SaaS</div>
+        <p>A Trello/Linear hybrid with AI task assistance, live collaboration, and enterprise-grade architecture. One project that naturally showcases ALL 12 interview topics — making every technical decision explainable in an interview context.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-label label-tech">📊 How FlowBoard Maps to Every Topic</div>
+        <table class="mapping-table">
+          <tr><th>Topic</th><th>FlowBoard Feature</th></tr>
+          <tr><td>Auth &amp; Authorization</td><td>JWT + Refresh tokens, RBAC (Admin/Member/Viewer), Google OAuth login</td></tr>
+          <tr><td>Real-Time Systems</td><td>Socket.IO — live board sync, typing indicators, presence (who's online)</td></tr>
+          <tr><td>Database Design</td><td>MongoDB — Board/Task/Comment schemas, compound indexes, aggregations for analytics</td></tr>
+          <tr><td>Caching (Redis)</td><td>Board data cached (cache-aside), rate limiting on AI endpoints, session store</td></tr>
+          <tr><td>Async Architecture</td><td>BullMQ — email notifications, AI task analysis processed as background jobs</td></tr>
+          <tr><td>System Design</td><td>Modular monolith ready for microservices — Auth, Board, Notification, AI services</td></tr>
+          <tr><td>File Storage</td><td>Multer + Cloudinary — drag-and-drop task attachments, profile avatars</td></tr>
+          <tr><td>Security</td><td>Helmet, CORS, Zod validation, rate limiting, mongo-sanitize, bcrypt</td></tr>
+          <tr><td>Docker</td><td>docker-compose — app + MongoDB + Redis + worker in one command</td></tr>
+          <tr><td>DevOps</td><td>GitHub Actions CI/CD → Render deployment, health checks, Nginx config</td></tr>
+          <tr><td>AI Integration</td><td>OpenAI API — AI breaks goals into tasks, smart priority suggestions, summaries</td></tr>
+          <tr><td>Architecture</td><td>Routes → Controllers → Services → Models, centralised error handling</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-label label-tech">✨ Key Features to Build</div>
+        <ul style="padding-left:1.25rem; font-size:0.88rem; color:var(--text-secondary)">
+          <li style="margin-bottom:0.5rem"><strong style="color:var(--text-primary)">Kanban Boards</strong> — drag-and-drop task cards with real-time sync across all users</li>
+          <li style="margin-bottom:0.5rem"><strong style="color:var(--text-primary)">AI Task Assistant</strong> — type a project goal, AI generates a full task breakdown</li>
+          <li style="margin-bottom:0.5rem"><strong style="color:var(--text-primary)">Live Presence</strong> — see avatars of teammates viewing the same board (like Figma/Notion)</li>
+          <li style="margin-bottom:0.5rem"><strong style="color:var(--text-primary)">Smart Notifications</strong> — async email (BullMQ) + in-app real-time (Socket.IO)</li>
+          <li style="margin-bottom:0.5rem"><strong style="color:var(--text-primary)">Analytics Dashboard</strong> — board velocity, task completion trends (MongoDB aggregations)</li>
+          <li style="margin-bottom:0.5rem"><strong style="color:var(--text-primary)">File Attachments</strong> — drag-and-drop files to task cards, preview images inline</li>
+          <li><strong style="color:var(--text-primary)">Activity Timeline</strong> — full audit log of every action on a board</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-label" style="color:var(--accent-violet)">🎤 Interview Talking Points</div>
+        <div class="talking-point">"I chose Redis caching for board data because boards are read 100x more than they're written. Cache-aside pattern reduced average load time from 120ms to under 5ms."</div>
+        <div class="talking-point">"The Node.js event loop meant I couldn't await OpenAI calls in request handlers — offloading to BullMQ kept response times under 50ms while AI runs asynchronously."</div>
+        <div class="talking-point">"I used refresh token rotation with DB storage — short 15min access tokens limit exposure if stolen, while revocable refresh tokens enable secure persistent sessions."</div>
+        <div class="talking-point">"For WebSocket scaling, I added the Redis adapter so any server instance can broadcast to any connected client — essential for horizontal scaling."</div>
+        <div class="talking-point">"I structured the codebase as Routes → Controllers → Services → Models. Services have zero HTTP knowledge, making them trivial to unit test and swap implementations."</div>
+      </div>
+
+      <div class="diagram-container">
+        <div class="diagram-title">📊 FlowBoard — Full Architecture</div>
+        <div class="mermaid">
+flowchart TD
+    FE[⚛️ React + Next.js\nFrontend] -->|REST + WebSocket| GW[⚖️ Nginx\nReverse Proxy]
+    GW --> API[⚙️ Node.js\nExpress API]
+    GW --> WS[🔌 Socket.IO\nServer]
+    API --> AUTH[🔐 JWT Auth\nMiddleware]
+    API --> Cache[🔴 Redis\nCache + Rate Limit]
+    API --> DB[(🍃 MongoDB\nBoards + Tasks)]
+    API --> Q[📋 BullMQ\nJob Queue]
+    WS --> Cache
+    Q --> W1[👷 Email Worker\nNodemailer]
+    Q --> W2[🤖 AI Worker\nOpenAI API]
+    Q --> W3[📁 File Worker\nCloudinary]
+    W2 -->|Socket notify| WS
+    CD[🐳 Docker Compose\nLocal Dev] -.-> API
+    CD -.-> DB
+    CD -.-> Cache
+    GHA[🔄 GitHub Actions\nCI/CD] --> PROD[🚀 Render\nProduction]
+        </div>
+      </div>
+
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🏆 Why This Project Wins Interviews</div>
+        <ul>
+          <li>Every technical decision has a <strong>justified reason</strong> you can articulate</li>
+          <li>Covers all 12 topics from your PDF in one coherent app</li>
+          <li>Shows you understand <strong>production concerns</strong>: scale, security, ops</li>
+          <li>Real-time + AI = two of the most impressive differentiators in 2025</li>
+          <li>Include a <strong>SYSTEM_DESIGN.md</strong> in the repo with architecture diagrams</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+
+
+
+
+  </main>
+</div>
+
+<footer>
+  <span>⚡ Interview Prep Guide</span>
+  <a href="https://github.com" target="_blank">GitHub</a>
+  <span style="margin-left:auto; color: var(--text-muted)">Built with HTML · CSS · JS · Mermaid.js · Prism.js</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
