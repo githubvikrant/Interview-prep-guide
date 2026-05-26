@@ -48,6 +48,9 @@
       <li><a href="#devops"><span class="nav-num">10</span> DevOps &amp; Deployment</a></li>
       <li><a href="#ai"><span class="nav-num">11</span> AI Integration</a></li>
       <li><a href="#architecture"><span class="nav-num">12</span> Code Architecture</a></li>
+      <li><a href="#frontend"><span class="nav-num">13</span> React &amp; Frontend</a></li>
+      <li><a href="#api-design"><span class="nav-num">14</span> REST vs GraphQL</a></li>
+      <li><a href="#testing"><span class="nav-num">15</span> Testing &amp; QA</a></li>
     </ul>
     <p class="sidebar-section-label">📦 Core Stack</p>
     <ul>
@@ -1785,6 +1788,131 @@ app.use((err, req, res, next) => {
     <hr class="section-divider" />
 
     <!-- ═══════════════════════════════════════════════
+         TOPIC 13: REACT & FRONTEND ARCHITECTURE
+    ═══════════════════════════════════════════════ -->
+    <section id="frontend" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(56,189,248,0.15)">⚛️</div>
+        <div class="topic-title-group">
+          <h2>React &amp; Frontend Architecture</h2>
+          <span class="priority-badge badge-critical">🔴 Core Skill</span>
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="emoji">🍳</div>
+        <div class="card-label label-analogy">Plain English — Restaurant Kitchen Analogy</div>
+        <p>Think of a React app like a modern restaurant kitchen. <strong>Components</strong> are the individual cooking stations (grill, salad, dessert). <strong>Props</strong> are the orders handed to a station from the head chef. <strong>State</strong> is the station's own internal inventory (how many eggs are left).</p>
+        <p style="margin-top:0.5rem">When a station's inventory changes (state updates), the chef only tells <em>that specific station</em> to re-evaluate what it's cooking (re-render), rather than tearing down the whole kitchen and rebuilding it. This targeted updating is the magic of React's Virtual DOM.</p>
+      </div>
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What causes a React component to re-render?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A component re-renders when: (1) Its internal <strong>State</strong> changes; (2) Its incoming <strong>Props</strong> change; (3) Its <strong>Parent</strong> re-renders; (4) It consumes a React <strong>Context</strong> that has updated. To prevent unnecessary re-renders, we use <code>React.memo</code> (for props) or <code>useMemo</code>/<code>useCallback</code> to keep object/function references stable across renders.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>When should you use Redux/Zustand vs React Context?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>React Context</strong> is great for dependency injection — passing data deep into the tree without "prop drilling" (e.g., current theme, logged-in user). However, when Context updates, <em>every</em> component consuming it re-renders. <strong>Zustand/Redux</strong> are global state managers that allow components to subscribe to <em>slices</em> of state. If a component only cares about <code>state.cartCount</code>, it only re-renders when <code>cartCount</code> changes, not when <code>state.userProfile</code> changes. Use Context for static/low-frequency updates, and Zustand for high-frequency dynamic state.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is Client-Side Rendering (CSR) vs Server-Side Rendering (SSR)?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>CSR (Vanilla React)</strong>: The server sends an empty HTML file and a massive JS bundle. The browser downloads the JS, executes it, and draws the UI. It's slow on first load and terrible for SEO because crawlers see a blank page. <strong>SSR (Next.js)</strong>: The server runs the React code, generates the fully populated HTML, and sends it to the browser. The user sees the content instantly (great SEO). Then the JS loads and "hydrates" the page, making it interactive. Use CSR for dashboards behind logins; use SSR for e-commerce, blogs, and public landing pages.</div>
+        </div>
+      </div>
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li><strong>State</strong> is internal and mutable; <strong>Props</strong> are external and immutable (read-only).</li>
+          <li>Never mutate state directly (e.g., <code>state.count++</code>) — always use the setter function to trigger a re-render.</li>
+          <li>Use <strong>Zustand or Redux Toolkit</strong> for complex global state instead of Context to avoid unnecessary re-renders.</li>
+          <li><strong>Next.js SSR</strong> solves React's SEO and initial load time problems by pre-rendering HTML on the server.</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 14: REST API vs GRAPHQL
+    ═══════════════════════════════════════════════ -->
+    <section id="api-design" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(236,72,153,0.15)">🌐</div>
+        <div class="topic-title-group">
+          <h2>REST APIs vs GraphQL</h2>
+          <span class="priority-badge badge-very-important">🟠 Very High Value</span>
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="emoji">🍔</div>
+        <div class="card-label label-analogy">Plain English — Restaurant Menu Analogy</div>
+        <p><strong>REST</strong> is like ordering off a set menu at a fast-food drive-thru. You ask for a "Combo #1" (endpoint: <code>/users/123</code>), and you get the burger, fries, and drink exactly as the kitchen prepares it. Even if you only wanted the burger, you still get (and download) everything (Over-fetching).</p>
+        <p style="margin-top:0.5rem"><strong>GraphQL</strong> is like a custom buffet. You hand the chef a specific list: "I want the burger patty, no bun, and two tomato slices." (The Query). The server returns <em>exactly</em> what you asked for, in the exact shape you asked for it. No more, no less.</p>
+      </div>
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is "Over-fetching" and "Under-fetching"?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer"><strong>Over-fetching</strong> (REST issue): You call <code>/api/users/1</code> to display a username in a header, but the API returns the user's entire profile, email, and address history, wasting bandwidth. <strong>Under-fetching</strong> (REST issue): You need a user's profile and their 5 recent posts. You have to make a call to <code>/users/1</code>, wait for the response, and then make a second call to <code>/users/1/posts</code>. GraphQL solves both by allowing the client to request exactly the user's name and their posts in a single query.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>If GraphQL is so good, why use REST at all?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">GraphQL is complex and shifts the burden to the server. (1) <strong>Caching</strong>: REST uses standard HTTP GET requests, meaning CDNs (Cloudflare) and browsers can easily cache responses. GraphQL usually uses POST requests to a single <code>/graphql</code> endpoint, making HTTP-level caching very difficult. (2) <strong>N+1 Problem</strong>: In GraphQL, fetching a list of authors and their books can accidentally trigger hundreds of separate database queries unless carefully optimized with tools like DataLoader. (3) REST is simpler, standard, and perfectly fine for most apps.</div>
+        </div>
+      </div>
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li><strong>REST</strong> uses multiple endpoints (URLs) and standard HTTP methods (GET, POST, PUT, DELETE).</li>
+          <li><strong>GraphQL</strong> uses a single endpoint (<code>/graphql</code>) and the client defines the shape of the response.</li>
+          <li>GraphQL solves <strong>Over-fetching</strong> and <strong>Under-fetching</strong>, great for mobile apps with limited bandwidth.</li>
+          <li>REST is much easier to cache natively at the CDN level.</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
+         TOPIC 15: TESTING (UNIT, INTEGRATION, E2E)
+    ═══════════════════════════════════════════════ -->
+    <section id="testing" class="topic-section">
+      <div class="topic-header">
+        <div class="topic-icon" style="background:rgba(16,185,129,0.15)">🧪</div>
+        <div class="topic-title-group">
+          <h2>Testing &amp; QA</h2>
+          <span class="priority-badge badge-very-important">🟠 Crucial for Seniors</span>
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="emoji">🏎️</div>
+        <div class="card-label label-analogy">Plain English — Car Manufacturing Analogy</div>
+        <p><strong>Unit Testing:</strong> Testing the car's brakes on a workbench. Does the caliper squeeze when pressure is applied? (Testing a single function in isolation).</p>
+        <p style="margin-top:0.5rem"><strong>Integration Testing:</strong> Connecting the brakes to the pedal and hydraulic lines. Do they work together correctly? (Testing the API route, database, and service logic together).</p>
+        <p style="margin-top:0.5rem"><strong>End-to-End (E2E) Testing:</strong> Putting a robot in the driver's seat, driving the car on a test track, and hitting the brakes at 60mph. (Simulating a real user clicking buttons in the browser).</p>
+      </div>
+      <div class="qa-section">
+        <div class="card-label">🎤 Interview Q&amp;A</div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is a "Mock" and why do we use them in Unit Tests?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">A mock is a fake version of an external dependency. If you are unit testing a "User Registration" function, you don't want it to actually save to a real database or send a real welcome email via SendGrid. You "mock" the database and email service so they simply return "Success". This makes the test fast, deterministic (doesn't fail if the wifi drops), and isolates the test to ONLY the registration logic, not the database connection.</div>
+        </div>
+        <div class="qa-item">
+          <button class="qa-question"><span class="qa-q-icon">Q</span>What is the "Testing Pyramid"?<span class="qa-chevron">▼</span></button>
+          <div class="qa-answer">The Testing Pyramid dictates how you should distribute your testing effort. At the base are <strong>Unit Tests</strong> (Jest/Vitest) — you should have hundreds of these because they are blazing fast and cheap to write. In the middle are <strong>Integration Tests</strong> (Supertest) — testing API endpoints. At the top are <strong>End-to-End Tests</strong> (Cypress/Playwright) — you should only have a few of these covering critical user flows (like Checkout or Login) because they are slow, brittle, and expensive to maintain.</div>
+        </div>
+      </div>
+      <div class="takeaway-box">
+        <div class="card-label label-takeaway">🔑 Key Takeaways</div>
+        <ul>
+          <li><strong>Unit Tests</strong> (Jest/Vitest): Fast, test single functions, mock dependencies.</li>
+          <li><strong>Integration Tests</strong> (Supertest): Test how layers (Router + Controller + DB) work together.</li>
+          <li><strong>E2E Tests</strong> (Cypress/Playwright): Simulate a real user clicking through the browser.</li>
+          <li>Follow the Testing Pyramid: Lots of unit tests, fewer integration tests, sparse E2E tests.</li>
+        </ul>
+      </div>
+    </section>
+    <hr class="section-divider" />
+
+    <!-- ═══════════════════════════════════════════════
          CORE STACK MASTERY
     ═══════════════════════════════════════════════ -->
     <section id="stack" class="topic-section">
@@ -1898,6 +2026,8 @@ app.use((err, req, res, next) => {
           <tr><td>DevOps</td><td>GitHub Actions CI/CD → Render deployment, health checks, Nginx config</td></tr>
           <tr><td>AI Integration</td><td>OpenAI API — AI breaks goals into tasks, smart priority suggestions, summaries</td></tr>
           <tr><td>Architecture</td><td>Routes → Controllers → Services → Models, centralised error handling</td></tr>
+          <tr><td>Frontend Architecture</td><td>React (Next.js) with Zustand for global state, Optimistic UI updates for zero-latency feel</td></tr>
+          <tr><td>Testing</td><td>Jest unit tests for business logic, Cypress E2E tests for the Kanban drag-and-drop flow</td></tr>
         </table>
       </div>
 
@@ -1921,6 +2051,7 @@ app.use((err, req, res, next) => {
         <div class="talking-point">"I used refresh token rotation with DB storage — short 15min access tokens limit exposure if stolen, while revocable refresh tokens enable secure persistent sessions."</div>
         <div class="talking-point">"For WebSocket scaling, I added the Redis adapter so any server instance can broadcast to any connected client — essential for horizontal scaling."</div>
         <div class="talking-point">"I structured the codebase as Routes → Controllers → Services → Models. Services have zero HTTP knowledge, making them trivial to unit test and swap implementations."</div>
+        <div class="talking-point">"On the frontend, I used Optimistic UI updates with Zustand. When a user moves a task card, the UI updates instantly while the API request happens in the background, making the app feel incredibly fast and responsive."</div>
       </div>
 
       <div class="diagram-container">
