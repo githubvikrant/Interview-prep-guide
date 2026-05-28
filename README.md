@@ -24,7 +24,7 @@ A comprehensive, interactive study guide covering all critical topics for full-s
 | 11 | AI Integration | 🟣 Optional But Powerful |
 | 12 | Architecture & Code Quality | 🟠 Very Overlooked |
 
-Plus: **Core Stack Mastery** and **FlowBoard Project Blueprint**
+Plus: **Core Stack Mastery** and **OmniFlow Project Blueprint**
 
 ## ✨ Features
 
@@ -84,7 +84,7 @@ python -m http.server 8000
 # Then open http://localhost:8000
 ```
 
-## 🚀 Recommended Project: FlowBoard
+## 🚀 Recommended Project: OmniFlow
 
 A **Real-Time AI-Enhanced Project Management SaaS** — one project that demonstrates ALL 12 interview topics with justifiable architectural decisions.
 
